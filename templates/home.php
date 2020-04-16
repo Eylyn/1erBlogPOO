@@ -1,10 +1,9 @@
 <?php
-//On inclut le fichier dont on a besoin (ici à la racine de notre site)
-require '../src/DAO/DAO.php';
-//Ne pas oublier d'ajouter le fichier Article.php
-require '../src/DAO/ArticleDAO.php';
 
-use App\src\DAO\ArticleDAO;
+require '../config/Autoloader.php';
+
+use App\config\Autoloader;
+Autoloader::register();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
