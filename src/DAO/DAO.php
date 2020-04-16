@@ -1,6 +1,6 @@
 <?php
 
-abstract class Database
+abstract class DAO
 {
     const DB_HOST = 'mysql:host=localhost;dbname=blogpoo;charset=utf8';
     const DB_USER = 'root';

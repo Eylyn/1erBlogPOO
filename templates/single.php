@@ -1,7 +1,7 @@
 <?php
-require 'Database.php';
-require 'Article.php';
-require 'Comment.php';
+require '../src/DAO/DAO.php';
+require '../src/DAO/ArticleDAO.php';
+require '../src/DAO/CommentDAO.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ require 'Comment.php';
         <h1>Mon Blog</h1>
         <p>En construction</p>
         <?php
-        $article = new Article();
+        $article = new ArticleDAO();
         $articles = $article->getArticle($_GET['articleid']);
         $article = $articles->fetch()
         ?>
@@ -35,7 +35,7 @@ require 'Comment.php';
         <div id='comments' class="text-left" style="margin-left: 50px">
             <h3>Commentaires</h3>
             <?php
-            $comment = new Comment();
+            $comment = new CommentDAO();
             $comments = $comment->getCommentsFromArticle($_GET['articleid']);
 
             while ($comment = $comments->fetch()) {
