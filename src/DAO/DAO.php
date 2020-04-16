@@ -1,5 +1,11 @@
 <?php
 
+namespace App\src\DAO;
+
+use PDO;
+use Exception;
+
+
 abstract class DAO
 {
     const DB_HOST = 'mysql:host=localhost;dbname=blogpoo;charset=utf8';
