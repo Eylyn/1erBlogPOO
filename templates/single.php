@@ -17,8 +17,6 @@ use App\src\DAO\CommentDAO;
         <h1>Mon Blog</h1>
         <p>En construction</p>
         <?php
-        $article = new \App\src\DAO\ArticleDAO();
-        $articles = $article->getArticle($_GET['articleid']);
         $article = $articles->fetch()
         ?>
         <div>
@@ -35,9 +33,6 @@ use App\src\DAO\CommentDAO;
         <div id='comments' class="text-left" style="margin-left: 50px">
             <h3>Commentaires</h3>
             <?php
-            $comment = new \App\src\DAO\CommentDAO();
-            $comments = $comment->getCommentsFromArticle($_GET['articleid']);
-
             while ($comment = $comments->fetch()) {
             ?>
                 <h4><?= htmlspecialchars($comment->pseudo); ?></h4>
