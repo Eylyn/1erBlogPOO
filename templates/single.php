@@ -1,8 +1,8 @@
 <?php
-require '../config/Autoloader.php';
+require '../vendor/autoload.php';
 
-use App\config\Autoloader;
-Autoloader::register();
+use App\src\DAO\ArticleDAO;
+use App\src\DAO\CommentDAO;
 ?>
 
 <!DOCTYPE html>
