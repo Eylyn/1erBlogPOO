@@ -24,7 +24,7 @@ class FrontController
 
     public function article($articleid)
     {
-        $articles = $this->articleDAO->getArticle($articleid);
+        $article = $this->articleDAO->getArticle($articleid);
         $comments = $this->commentDAO->getCommentsFromArticle($articleid);
         require '../templates/single.php';
     }

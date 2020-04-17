@@ -16,31 +16,24 @@ use App\src\DAO\CommentDAO;
     <div>
         <h1>Mon Blog</h1>
         <p>En construction</p>
-        <?php
-        $article = $articles->fetch()
-        ?>
         <div>
-            <h2><?= htmlspecialchars($article->title); ?> </h2>
-            <p><?= htmlspecialchars($article->content); ?></p>
-            <p><?= htmlspecialchars($article->author); ?></p>
-            <p>Créé le : <?= htmlspecialchars($article->createdAt) ?></p>
+            <h2><?= htmlspecialchars($article->getTitle()); ?> </h2>
+            <p><?= htmlspecialchars($article->getContent()); ?></p>
+            <p><?= htmlspecialchars($article->getAuthor()); ?></p>
+            <p>Créé le : <?= htmlspecialchars($article->getCreatedAt()) ?></p>
         </div>
         <br>
-        <?php
-        $articles->closeCursor();
-        ?>
         <a href="../public/index.php">Retour à l'accueil</a>
         <div id='comments' class="text-left" style="margin-left: 50px">
             <h3>Commentaires</h3>
             <?php
-            while ($comment = $comments->fetch()) {
+            foreach($comments as $comment) {
             ?>
-                <h4><?= htmlspecialchars($comment->pseudo); ?></h4>
-                <p><?= htmlspecialchars($comment->content); ?></p>
-                <p>Posté le <?= htmlspecialchars($comment->createdAt); ?></p>
+                <h4><?= htmlspecialchars($comment->getPseudo()); ?></h4>
+                <p><?= htmlspecialchars($comment->getContent()); ?></p>
+                <p>Posté le <?= htmlspecialchars($comment->getCreatedAt()); ?></p>
             <?php
             }
-            $comments->closeCursor();
             ?>
         </div>
     </div>
