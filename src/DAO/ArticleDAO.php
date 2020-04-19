@@ -55,4 +55,13 @@ class ArticleDAO extends DAO
             'articleid' => $articleid
         ]);
     }
+
+    public function deleteArticle($articleid)
+    {
+        $sql = 'DELETE FROM comment WHERE article_id = ?';
+        $this->createQuery($sql, [$articleid]);
+        $sql = 'DELETE FROM article WHERE id = ?';
+        $this->createQuery($sql, [$articleid]);
+        
+    }
 }
