@@ -9,6 +9,10 @@
     <p>Créé le : <?= htmlspecialchars($article->getCreatedAt()) ?></p>
 </div>
 <br>
+<div class="actions">
+<a href="../public/index.php?route=editArticle&articleid=<?=$article->getId();?>">Modifier</a>
+</div>
+<br>
 <a href="../public/index.php">Retour à l'accueil</a>
 <div id='comments' class="text-left" style="margin-left: 50px">
     <h3>Commentaires</h3>
