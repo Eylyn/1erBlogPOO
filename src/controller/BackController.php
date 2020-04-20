@@ -66,4 +66,26 @@ class BackController extends Controller
         header('Location: ../public/index.php');
     }
 
+    public function profile()
+    {
+        return $this->view->render('profile');
+    }
+    
+    public function updatePassword(Parameter $post)
+    {
+        if ($post->get('submit')) {
+            $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
+            $this->session->set('update_password', 'Mot de passe mis à jour <br>');
+            header('Location: ../public/index.php');
+        }
+        return $this->view->render('update_password');
+    }
+
+    public function logout()
+    {
+        $this->session->stop();
+        $this->session->start();
+        $this->session->set('logout', 'Vous avez été déconnecté <br>');
+        header('Location: ../public/index.php');
+    }
 }

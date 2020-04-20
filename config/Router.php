@@ -38,7 +38,16 @@ class Router
                     $this->frontController->register($this->request->getPost());
                 }
                 elseif ($route === 'login') {
-                    $this->frontController->login($this->request->getGet->get());
+                    $this->frontController->login($this->request->getPost());
+                }
+                elseif ($route === 'profile') {
+                    $this->backController->profile();
+                }
+                elseif($route === 'logout'){
+                    $this->backController->logout();
+                }
+                elseif($route === 'updatePassword'){
+                    $this->backController->updatePassword($this->request->getPost());
                 }
                 elseif ($route === 'editArticle'){
                     $this->backController->editArticle($this->request->getPost(), $this->request->getGet()->get('articleid'));
