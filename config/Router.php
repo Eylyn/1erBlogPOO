@@ -37,6 +37,8 @@ class Router
                     $this->frontController->login($this->request->getPost());
                 } elseif ($route === 'profile') {
                     $this->backController->profile();
+                } elseif ($route === 'administration') {
+                    $this->backController->administration();
                 } elseif ($route === 'logout') {
                     $this->backController->logout();
                 } elseif ($route === 'updatePassword') {

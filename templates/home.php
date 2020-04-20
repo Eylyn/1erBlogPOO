@@ -14,16 +14,18 @@
 <?= $this->session->show('delete_account'); ?>
 <?php
 if ($this->session->get('pseudo')) {
-    ?>
+?>
     <a href="../public/index.php?route=logout">Deconnexion</a>
-<a href="../public/index.php?route=profile">Profil</a>
-<a href="../public/index.php?route=addArticle">Nouvel article</a>
+    <a href="../public/index.php?route=profile">Profil</a>
+    <?php if ($this->session->get('role') === 'admin') { ?>
+        <a href="../public/index.php?route=administration">Administration</a>
+    <?php } ?>
+    <a href="../public/index.php?route=addArticle">Nouvel article</a>
 <?php
-}
-else {
-    ?>
-        <a href="../public/index.php?route=register">Inscription</a>
-<a href="../public/index.php?route=login">Connexion</a>
+} else {
+?>
+    <a href="../public/index.php?route=register">Inscription</a>
+    <a href="../public/index.php?route=login">Connexion</a>
 <?php
 }
 ?>

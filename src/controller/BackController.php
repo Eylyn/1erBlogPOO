@@ -6,6 +6,11 @@ use App\config\Parameter;
 class BackController extends Controller
 {
 
+    public function administration()
+    {
+        return $this->view->render('administration');
+    }
+
     public function addArticle(Parameter $post)
     {
         if($post->get('submit')) {
