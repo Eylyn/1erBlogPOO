@@ -11,7 +11,7 @@ class ArticleDAO extends DAO
         $article->setId($row['id']);
         $article->setTitle($row['title']);
         $article->setContent($row['content']);
-        $article->setAuthor($row['author']);
+        $article->setAuthor($row['pseudo']);
         $article->setCreatedAt($row['createdAt']);
 
         return $article;
@@ -19,10 +19,10 @@ class ArticleDAO extends DAO
 
     public function getArticles()
     {
-        $sql = 'SELECT id, title, content, author, createdAt FROM article ORDER BY id DESC';
+        $sql = 'SELECT article.id, article.title, article.content, user.pseudo, article.createdAt FROM article INNER JOIN user ON article.user_id = user.id ORDER BY article.id DESC';
         $result = $this->createQuery($sql);
         $articles = [];
-        foreach($result as $row){
+        foreach ($result as $row){
             $articleid = $row['id'];
             $articles[$articleid] = $this->buildObject($row);
         }
@@ -32,26 +32,26 @@ class ArticleDAO extends DAO
 
     public function getArticle($articleid)
     {
-        $sql = 'SELECT id, title, content, author, createdAt FROM article WHERE id=?';
+        $sql = 'SELECT article.id, article.title, article.content, user.pseudo, article.createdAt FROM article INNER JOIN user ON article.user_id = user.id WHERE article.id = ?';
         $result = $this->createQuery($sql, [$articleid]);
         $article = $result->fetch();
         $result->closeCursor();
         return $this->buildObject($article);
     }
 
-    public function addArticle(Parameter $post)
+    public function addArticle(Parameter $post, $userid)
     {
-        $sql = 'INSERT INTO article(title, content, author, createdAt) VALUES (?, ?, ?, NOW())';
-        $this->createQuery($sql, [$post->get('title'), $post->get('content'), $post->get('author')]);
+        $sql = 'INSERT INTO article (title, content, createdAt, user_id) VALUES (?, ?, NOW(), ?)';
+        $this->createQuery($sql, [$post->get('title'), $post->get('content'), $userid]);
     }
 
-    public function editArticle(Parameter $post, $articleid)
+    public function editArticle(Parameter $post, $articleid, $userid)
     {
-        $sql = 'UPDATE article SET title=:title, content=:content, author=:author WHERE id=:articleid';
+        $sql = 'UPDATE article SET title=:title, content=:content, user_id=:user_id WHERE id=:articleid';
         $this->createQuery($sql, [
             'title' => $post->get('title'),
             'content' => $post->get('content'),
-            'author' => $post->get('author'),
+            'user_id' => $userid,
             'articleid' => $articleid
         ]);
     }

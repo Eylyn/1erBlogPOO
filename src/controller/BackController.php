@@ -8,45 +8,45 @@ class BackController extends Controller
 
     public function administration()
     {
-        return $this->view->render('administration');
+        $articles = $this->articleDAO->getArticles();
+        return $this->view->render('administration', [
+            'articles' => $articles
+        ]);
     }
 
     public function addArticle(Parameter $post)
     {
         if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'Article');
-            if (!$errors) {
-                $this->articleDAO->addArticle($post);
-                $this->session->set('add_article', 'Le nouvel article a bien été ajouté <br>');
-                header('Location: ../public/index.php');
+            if(!$errors) {
+                $this->articleDAO->addArticle($post, $this->session->get('id'));
+                $this->session->set('add_article', 'Le nouvel article a bien été ajouté');
+                header('Location: ../public/index.php?route=administration');
             }
-
             return $this->view->render('add_article', [
                 'post' => $post,
                 'errors' => $errors
             ]);
         }
-
         return $this->view->render('add_article');
     }
     
     public function editArticle(Parameter $post, $articleid)
     {
         $article = $this->articleDAO->getArticle($articleid);
-        
         if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'Article');
-            if (!$errors) {
-            $this->articleDAO->editArticle($post, $articleid);
-            $this->session->set('edit_article', 'L\' article a bien été modifié <br>');
-            header('Location: ../public/index.php');
+            if(!$errors) {
+                $this->articleDAO->editArticle($post, $articleid, $this->session->get('id'));
+                $this->session->set('edit_article', 'L\' article a bien été modifié');
+                header('Location: ../public/index.php?route=administration');
             }
             return $this->view->render('edit_article', [
                 'post' => $post,
                 'errors' => $errors
             ]);
-        }
 
+        }
         $post->set('id', $article->getId());
         $post->set('title', $article->getTitle());
         $post->set('content', $article->getContent());
@@ -61,7 +61,7 @@ class BackController extends Controller
     {
         $this->articleDAO->deleteArticle($articleid);
         $this->session->set('delete_article', 'L\'article a bien été supprimé <br>');
-        header('Location: ../public/index.php');
+        header('Location: ../public/index.php?route=administration');
     }
 
     public function deleteComment($commentid)
@@ -81,7 +81,7 @@ class BackController extends Controller
         if ($post->get('submit')) {
             $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
             $this->session->set('update_password', 'Mot de passe mis à jour <br>');
-            header('Location: ../public/index.php');
+            header('Location: ../public/index.php?route=profile');
         }
         return $this->view->render('update_password');
     }
