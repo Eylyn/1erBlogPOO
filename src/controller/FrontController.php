@@ -30,7 +30,7 @@ class FrontController extends Controller
             $errors = $this->validation->validate($post, 'Comment');
             if (!$errors) {
                 $this->commentDAO->addComment($post,$articleid);
-                $this->session->set('addComment', 'Votre commentaire a bien été ajouté');
+                $this->session->set('addComment', 'Votre commentaire a bien été ajouté <br>');
                 header('Location: ../public/index.php?route=article&articleid='.$articleid);
             }
             $article = $this->articleDAO->getArticle($articleid);
@@ -41,7 +41,13 @@ class FrontController extends Controller
                 'post' => $post,
                 'errors' => $errors
             ]);
-
         }
+    }
+
+    public function flagComment($commentid)
+    {
+        $this->commentDAO->flagComment($commentid);
+        $this->session->set('flag_comment', 'Le commentaire a bien été signalé <br>');
+        header('Location: ../public/index.php');
     }
 }

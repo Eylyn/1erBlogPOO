@@ -8,6 +8,16 @@ class Comment
     private $pseudo;
     private $content;
     private $createdAt;
+    private $flag;
+
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
     
     public function setId($id)
     {
@@ -61,4 +71,21 @@ class Comment
     {
         $this->createdAt = $createdAt;
     }
+
+    /**
+     * @return bool
+     */
+
+     public function isFlag()
+     {
+         return $this->flag;
+     }
+
+     /**
+      * @param bool $flag
+      */
+      public function setFlag($flag)
+      {
+          $this->flag = $flag;
+      }
 }

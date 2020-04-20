@@ -12,7 +12,7 @@ class BackController extends Controller
             $errors = $this->validation->validate($post, 'Article');
             if (!$errors) {
                 $this->articleDAO->addArticle($post);
-                $this->session->set('add_article', 'Le nouvel article a bien été ajouté');
+                $this->session->set('add_article', 'Le nouvel article a bien été ajouté <br>');
                 header('Location: ../public/index.php');
             }
 
@@ -33,7 +33,7 @@ class BackController extends Controller
             $errors = $this->validation->validate($post, 'Article');
             if (!$errors) {
             $this->articleDAO->editArticle($post, $articleid);
-            $this->session->set('edit_article', 'L\' article a bien été modifié');
+            $this->session->set('edit_article', 'L\' article a bien été modifié <br>');
             header('Location: ../public/index.php');
             }
             return $this->view->render('edit_article', [
@@ -55,7 +55,7 @@ class BackController extends Controller
     public function deleteArticle($articleid)
     {
         $this->articleDAO->deleteArticle($articleid);
-        $this->session->set('delete_article', 'L\'article a bien été supprimé');
+        $this->session->set('delete_article', 'L\'article a bien été supprimé <br>');
         header('Location: ../public/index.php');
     }
 

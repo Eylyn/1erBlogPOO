@@ -43,6 +43,9 @@ class Router
                 elseif ($route === 'addComment') {
                     $this->frontController->addComment($this->request->getPost(), $this->request->getGet()->get('articleid'));
                 }
+                elseif ($route === 'flagComment') {
+                    $this->frontController->flagComment($this->request->getGet()->get('commentid'));
+                }
                 else{
                     $this->errorController->errorNotFound();
                 }
