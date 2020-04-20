@@ -34,6 +34,12 @@ class Router
                 elseif ($route === 'addArticle'){
                     $this->backController->addArticle($this->request->getPost());
                 }
+                elseif ($route === 'register') {
+                    $this->frontController->register($this->request->getPost());
+                }
+                elseif ($route === 'login') {
+                    $this->frontController->login($this->request->getGet->get());
+                }
                 elseif ($route === 'editArticle'){
                     $this->backController->editArticle($this->request->getPost(), $this->request->getGet()->get('articleid'));
                 }
