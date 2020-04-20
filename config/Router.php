@@ -25,55 +25,41 @@ class Router
     public function run()
     {
         $route = $this->request->getGet()->get('route');
-        try{
-            if(isset($route))
-            {
-                if($route === 'article'){
+        try {
+            if (isset($route)) {
+                if ($route === 'article') {
                     $this->frontController->article($this->request->getGet()->get('articleid'));
-                }
-                elseif ($route === 'addArticle'){
+                } elseif ($route === 'addArticle') {
                     $this->backController->addArticle($this->request->getPost());
-                }
-                elseif ($route === 'register') {
+                } elseif ($route === 'register') {
                     $this->frontController->register($this->request->getPost());
-                }
-                elseif ($route === 'login') {
+                } elseif ($route === 'login') {
                     $this->frontController->login($this->request->getPost());
-                }
-                elseif ($route === 'profile') {
+                } elseif ($route === 'profile') {
                     $this->backController->profile();
-                }
-                elseif($route === 'logout'){
+                } elseif ($route === 'logout') {
                     $this->backController->logout();
-                }
-                elseif($route === 'updatePassword'){
+                } elseif ($route === 'updatePassword') {
                     $this->backController->updatePassword($this->request->getPost());
-                }
-                elseif ($route === 'editArticle'){
+                } elseif ($route === 'editArticle') {
                     $this->backController->editArticle($this->request->getPost(), $this->request->getGet()->get('articleid'));
-                }
-                elseif ($route === "deleteArticle") {
+                } elseif ($route === "deleteArticle") {
                     $this->backController->deleteArticle($this->request->getGet()->get('articleid'));
-                }
-                elseif ($route === 'addComment') {
+                } elseif ($route === 'addComment') {
                     $this->frontController->addComment($this->request->getPost(), $this->request->getGet()->get('articleid'));
-                }
-                elseif ($route === 'flagComment') {
+                } elseif ($route === 'flagComment') {
                     $this->frontController->flagComment($this->request->getGet()->get('commentid'));
-                }
-                elseif ($route === 'deleteComment') {
+                } elseif ($route === 'deleteComment') {
                     $this->backController->deleteComment($this->request->getGet()->get('commentid'));
-                }
-                else{
+                } elseif ($route === 'deleteAccount') {
+                    $this->backController->deleteAccount();
+                } else {
                     $this->errorController->errorNotFound();
                 }
-            }
-            else{
+            } else {
                 $this->frontController->home();
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             $this->errorController->errorServer();
         }
     }
