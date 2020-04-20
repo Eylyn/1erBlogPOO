@@ -59,4 +59,11 @@ class BackController extends Controller
         header('Location: ../public/index.php');
     }
 
+    public function deleteComment($commentid)
+    {
+        $this->commentDAO->deleteComment($commentid);
+        $this->session->set('delete_comment', 'Le commentaire a bien été supprimé <br>');
+        header('Location: ../public/index.php');
+    }
+
 }
