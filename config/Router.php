@@ -57,6 +57,8 @@ class Router
                     $this->backController->deleteComment($this->request->getGet()->get('commentid'));
                 } elseif ($route === 'deleteAccount') {
                     $this->backController->deleteAccount();
+                } elseif ($route === 'deleteUser') {
+                    $this->backController->deleteUser($this->request->getGet()->get('userId'));
                 } else {
                     $this->errorController->errorNotFound();
                 }
