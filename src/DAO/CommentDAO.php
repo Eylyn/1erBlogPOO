@@ -43,9 +43,28 @@ class CommentDAO extends DAO
         $this->createQuery($sql, [1, $commentid]);
     }
 
+    public function unflagComment($commentid)
+    {
+        $sql = 'UPDATE comment SET flag = ? WHERE id = ?';
+        $this->createQuery($sql, [0, $commentid]);
+    }
+
     public function deleteComment($commentid)
     {
         $sql = 'DELETE FROM comment WHERE id = ?';
         $this->createQuery($sql, [$commentid]);
+    }
+
+    public function getFlagComments()
+    {
+        $sql = 'SELECT id, pseudo, content, createdAt, flag FROM comment WHERE flag = ? ORDER BY createdAt DESC';
+        $result = $this->createQuery($sql, [1]);
+        $comments = [];
+        foreach ($result as $row) {
+            $commentid = $row['id'];
+            $comments[$commentid] = $this->buildObject($row);
+        }
+        $result->closeCursor();
+        return $comments;
     }
 }

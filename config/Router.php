@@ -51,6 +51,8 @@ class Router
                     $this->frontController->addComment($this->request->getPost(), $this->request->getGet()->get('articleid'));
                 } elseif ($route === 'flagComment') {
                     $this->frontController->flagComment($this->request->getGet()->get('commentid'));
+                } elseif ($route === 'unflagComment') {
+                    $this->backController->unflagComment($this->request->getGet()->get('commentId'));
                 } elseif ($route === 'deleteComment') {
                     $this->backController->deleteComment($this->request->getGet()->get('commentid'));
                 } elseif ($route === 'deleteAccount') {
